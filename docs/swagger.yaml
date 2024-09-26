@@ -1,0 +1,52 @@
+basePath: /swagger/websocket-service
+definitions:
+  common.Response:
+    properties:
+      data: {}
+      msg:
+        type: string
+      status:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: websocket-service API 文档.
+  title: websocket-service RESTful API
+  version: "1.0"
+paths:
+  /sim-send/{pubsub}/{topic}:
+    post:
+      description: 模拟发送到前端消息
+      parameters:
+      - description: pubsub
+        in: path
+        name: pubsub
+        required: true
+        type: string
+      - description: web
+        in: path
+        name: topic
+        required: true
+        type: string
+      - description: 模拟消息
+        in: body
+        name: msg
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "20000":
+          description: ok
+          schema:
+            $ref: '#/definitions/common.Response'
+        "50000":
+          description: 错误code和错误信息
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: 模拟发送到Topic消息
+      tags:
+      - MessageSim
+swagger: "2.0"
