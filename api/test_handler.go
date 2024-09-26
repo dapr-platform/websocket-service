@@ -34,6 +34,7 @@ func pubsubTopicSendHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg("read body error").AppendMsg(err.Error()))
 		return
 	}
+
 	err = common.GetDaprClient().PublishEvent(r.Context(), pubsub, topic, msg)
 	if err != nil {
 		common.HttpResult(w, common.ErrParam.AppendMsg("PublishEvent error").AppendMsg(err.Error()))
